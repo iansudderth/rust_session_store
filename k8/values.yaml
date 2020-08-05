@@ -1,0 +1,11 @@
+
+global:
+  namespaceOverride: rust-session-store
+
+
+mongodb:
+  publicPath: "/mongodb"
+  auth:
+    rootPassword: "root"
+  externalAccess:
+    enabled: true
