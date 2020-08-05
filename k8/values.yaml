@@ -1,11 +1,22 @@
 
 global:
   namespaceOverride: rust-session-store
+  postgresql:
+    postgresqlPassword: postgres
 
+#
+#mongodb:
+#  publicPath: "/mongodb"
+#  auth:
+#    rootPassword: "root"
+#  externalAccess:
+#    enabled: true
 
-mongodb:
-  publicPath: "/mongodb"
-  auth:
-    rootPassword: "root"
-  externalAccess:
-    enabled: true
+postgresql:
+
+  postgresqlUsername: postgres
+  postgresqlPostgresPassword: postgres
+  networkPolicy:
+    explicitNamespacesSelector:
+      name: rust-session-store
+  publicPort: 30004
