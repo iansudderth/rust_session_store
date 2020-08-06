@@ -20,3 +20,7 @@ postgresql:
     explicitNamespacesSelector:
       name: rust-session-store
   publicPort: 30004
+
+redis:
+  password: root
+  publicPort: 30005
