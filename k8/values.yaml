@@ -22,5 +22,5 @@ postgresql:
   publicPort: 30004
 
 redis:
-  password: root
+  usePassword: false
   publicPort: 30005
