@@ -13,3 +13,4 @@ postgres-types = "0.1.2"
 tokio = { version = "0.2", features = ["full"] }
 futures = "0.3.5"
 mini-redis = "0.2.0"
+bytes = "0.5.6"

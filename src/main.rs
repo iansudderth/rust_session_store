@@ -1,23 +1,33 @@
 use tokio::net::{TcpListener, TcpStream};
 use mini_redis::{Connection, Frame};
+use std::sync::{Arc, Mutex};
+use bytes::Bytes;
+use std::collections::HashMap;
+
+
+type Db = Arc<Mutex<HashMap<String,Bytes>>>;
+
 
 #[tokio::main]
 async fn main() {
     let mut listener = TcpListener::bind("127.0.0.1:30006").await.unwrap();
 
+    println!("listening");
+
+    let db = Arc::new(Mutex::new(HashMap::new()));
+
     loop {
         let (socket, _) = listener.accept().await.unwrap();
-        tokio::spawn(async move {
-            process(socket).await;
-        });
+        let db = db.clone;
+
+        println!("accepted");
+        process(socket, db).await;
     }
 }
 
-async fn process(socket: TcpStream) {
+async fn process(socket: TcpStream, db: Db) {
     use mini_redis::Command::{self, Get, Set};
-    use std::collections::HashMap;
 
-    let mut db = HashMap::new();
 
     let mut connection = Connection::new(socket);
 
